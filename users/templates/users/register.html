@@ -1,0 +1,65 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/assets/css/main.css' %}">
+<!-- Form-->
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one">
+    <div class="form-header">
+      <h1>SIGN UP</h1>
+    </div>
+    <div class="form-content">
+      <form method="POST">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <div id="form_errors">
+            {% for key, value in form.errors.items %}
+            <strong>{{ value }}</strong>
+            {% endfor %}
+          </div>
+
+        </div>
+        {% endif %}
+        <div class="form-group">
+          <label for="sign_text_FirstName">Firstname</label>
+          {{ form.first_name }}
+        </div>
+        <div class="form-group">
+          <label for="sign_text_LastName">Lastname</label>
+          {{ form.last_name }}
+        </div>
+        <div class="form-group">
+          <label for="sign_text_UserName">Username</label>
+          {{ form.username }}
+        </div>
+        <div class="form-group">
+          <label for="sign_text_Email">Email</label>
+          {{ form.email}}
+        </div>
+        <div class="form-group">
+          <label for="sign_text_PassWord1">Password</label>
+          {{ form.password1 }}
+        </div>
+        <div class="form-group">
+          <label for="sign_text_PassWord2">Confirm Password</label>
+          {{ form.password2}}
+        </div>
+
+        <div class="form-group">
+          <br><button id="sign_Button_Sign up" type="submit">Sign up</button><br>
+        </div>
+
+        <div class="card-footer text-center">
+          <div class="medium">
+            <a href="{% url 'login' %}">Already have an account? Go to Sign In</a><br>
+          </div>
+        </div>
+      </form>
+      <!--Social Media Login-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}

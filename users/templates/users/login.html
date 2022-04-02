@@ -1,0 +1,56 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/assets/css/main.css' %}">
+<!-- Form-->
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one">
+    <div class="form-header">
+      <h1>Account Login</h1>
+    </div>
+      <div class="form-content">
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <div id="form_errors">
+            {% for key, value in form.errors.items %}
+            <strong>{{ value }}</strong>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="login_text_UserName">Username</label>
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            <label for="login_text_PassWord">Password</label>
+            {{ form.password }}
+          </div>
+          <div class="form-group">
+
+            <label class="form-remember">
+              {{ form.remember_me}}
+              Remember Me
+            </label>
+            <a class="form-recovery" href="{% url 'password_reset' %}" id="login_Href_Remember_Me">Forgot Password?</a>
+          </div>
+          <div class="form-group">
+            <button id="login_Button_Login" type="submit">Log In</button>
+
+          </div>
+
+          <div class="card-footer text-center">
+            <div class="medium">
+                <a href="{% url 'register' %}">Don't have an account yet? Go to Sign Up</a><br>
+            </div>
+        </div>
+        <a href="{% url 'social:begin' 'github' %}" class="btn btn-link btn-lg active btn-block">Sign in with GitHub</a>
+        </form>
+      </div>
+    
+  </div>
+</div>
+{% endblock %}
